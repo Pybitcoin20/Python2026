@@ -1,0 +1,6 @@
+{
+  "name": "Uzbekistan Heritage & Travel Guide",
+  "description": "A comprehensive smart ecosystem for tourists in Uzbekistan, featuring cultural insights, logistics, and a real-time Plov Radar.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["PWA", "Localization", "Smart Proximity"]
+}

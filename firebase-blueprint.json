@@ -1,0 +1,81 @@
+{
+  "entities": {
+    "Location": {
+      "title": "Location",
+      "description": "A point of interest in Uzbekistan (Hotel, Restaurant, Site)",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "category": { "type": "string", "enum": ["hotel", "restaurant", "historical_site", "plov_center"] },
+        "region": { "type": "string" },
+        "address": { "type": "string" },
+        "lat": { "type": "number" },
+        "lng": { "type": "number" },
+        "rating": { "type": "number" },
+        "reviewCount": { "type": "number" },
+        "images": { "type": "array", "items": { "type": "string" } },
+        "plovStyle": { "type": "string" },
+        "bestPlovTime": { "type": "string" }
+      },
+      "required": ["name", "category", "region", "lat", "lng"]
+    },
+    "Review": {
+      "title": "Review",
+      "description": "User review for a location",
+      "type": "object",
+      "properties": {
+        "locationId": { "type": "string" },
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "rating": { "type": "number" },
+        "comment": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["locationId", "userId", "rating"]
+    },
+    "Booking": {
+      "title": "Booking",
+      "description": "A reservation for a hotel or table",
+      "type": "object",
+      "properties": {
+        "locationId": { "type": "string" },
+        "userId": { "type": "string" },
+        "type": { "type": "string", "enum": ["hotel", "table"] },
+        "date": { "type": "string", "format": "date-time" },
+        "status": { "type": "string", "enum": ["pending", "confirmed", "cancelled"] },
+        "guests": { "type": "number" }
+      },
+      "required": ["locationId", "userId", "type", "date"]
+    },
+    "CulturalTip": {
+      "title": "Cultural Tip",
+      "description": "Dos, Don'ts, and legal advice for tourists",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "category": { "type": "string", "enum": ["dos_and_donts", "bargaining", "ethics", "legal"] }
+      },
+      "required": ["title", "content", "category"]
+    }
+  },
+  "firestore": {
+    "/locations": {
+      "schema": "Location",
+      "description": "Collection of POIs"
+    },
+    "/locations/{locationId}/reviews": {
+      "schema": "Review",
+      "description": "Reviews for a specific location"
+    },
+    "/bookings": {
+      "schema": "Booking",
+      "description": "User reservations"
+    },
+    "/cultural_tips": {
+      "schema": "CulturalTip",
+      "description": "Cultural and legal guidance"
+    }
+  }
+}
